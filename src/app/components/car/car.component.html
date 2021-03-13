@@ -1,0 +1,22 @@
+<div class="rounded-0 mt-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Marka</th>
+        <th>Renk</th>
+        <th>Günlük Fiyat</th>
+        <th>Açıklama</th>
+        <th>Model Yılı</th>
+      </tr>
+    </thead>
+    <tr *ngFor="let car of cars">
+      <td>{{ car.id }}</td>
+      <td>{{ car.brandName }}</td>
+      <td>{{ car.colorName }}</td>
+      <td>{{ car.dailyPrice }}</td>
+      <td>{{ car.description }}</td>
+      <td>{{ car.modelYear }}</td>
+    </tr>
+  </table>
+</div>
