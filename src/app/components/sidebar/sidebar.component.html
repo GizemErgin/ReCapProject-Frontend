@@ -1,20 +1,14 @@
-<div class="list-group rounded-0 mt-4">
-  <div class="list-group-item sidebar-title">
-     MENÜ
+<ul>
+  <div class="list-group rounded-0 mt-4">
+    <li><div class="list-group-item sidebar-title">BRANDS</div></li>
+    <li *ngFor="let brand of brands" class="list-group-item">{{brand.brandName}}</li>
   </div>
-  <a class="list-group-item list-group-item-action" routerLink="rentals">
-     Kiralamalar
-  </a>
-  <a class="list-group-item list-group-item-action" routerLink="customers">
-     Müşteriler
-  </a>
-  <a class="list-group-item list-group-item-action" routerLink="cars">
-     Arabalar
-  </a>
-  <a class="list-group-item list-group-item-action" routerLink="brands">
-     Markalar
-  </a>
-  <a class="list-group-item list-group-item-action" routerLink="colors">
-     Renkler
-  </a>
-</div>
+</ul>
+
+<ul>
+  <div class="list-group rounded-0 mt-4">
+    <li><div class="list-group-item sidebar-title">BRANDS</div></li>
+    <li *ngFor="let color of colors" class="list-group-item">{{color.colorName}}</li>
+  </div>
+</ul>
+

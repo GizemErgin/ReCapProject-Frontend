@@ -9,5 +9,5 @@ export interface RentalDto{
     lastName:string;
     companyName:string;
     rentDate:Date;
-    returnDate:Date;
+    returnDate?:Date;
 }

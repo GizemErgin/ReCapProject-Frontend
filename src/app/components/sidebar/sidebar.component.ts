@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Brand } from 'src/app/models/Brand/brand';
+import { Color } from 'src/app/models/Color/color';
+import { BrandService } from 'src/app/services/Brand/brand.service';
+import { ColorService } from 'src/app/services/Color/color.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,11 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   
-  menus : any=['','','','',''];
+  brands:Brand[];
+  colors:Color[];
   
-  constructor() { }
+  constructor(private brandService:BrandService, private colorService:ColorService) { }
 
   ngOnInit(): void {
+    this.getBrands();
+    this.getColors();
   }
 
+  getBrands(){
+    this.brandService.getBrands().subscribe(response=>{
+        this.brands=response.data;
+    })
+  }
+
+  getColors(){
+    this.colorService.getColors().subscribe(response=>{
+        this.colors=response.data;
+    })
+  }
 }

@@ -1,22 +1,37 @@
 <div class="rounded-0 mt-4">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Marka</th>
-        <th>Renk</th>
-        <th>Günlük Fiyat</th>
-        <th>Açıklama</th>
-        <th>Model Yılı</th>
-      </tr>
-    </thead>
-    <tr *ngFor="let car of cars">
-      <td>{{ car.id }}</td>
-      <td>{{ car.brandName }}</td>
-      <td>{{ car.colorName }}</td>
-      <td>{{ car.dailyPrice }}</td>
-      <td>{{ car.description }}</td>
-      <td>{{ car.modelYear }}</td>
-    </tr>
-  </table>
+  <app-car-filter></app-car-filter>
+  <div class="row px-2">
+    <div *ngFor="let car of cars" class="card mx-2" style="width: 14rem">
+      <img
+        src="https://localhost:44316/{{car.imagePath}}"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ car.description }}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Id: {{ car.id }}</li>
+        <li class="list-group-item">Marka: {{ car.brandName }}</li>
+        <li class="list-group-item">Renk: {{ car.colorName }}</li>
+        <li class="list-group-item">Fiyat: {{ car.dailyPrice }} TL</li>
+      </ul>
+      <div class="card-body">
+        <button
+          routerLink="/cars/car-detail/{{ car.id }}"
+          type="button"
+          class="btn btn-light"
+        >
+          Detaylar
+        </button>
+        <button
+          routerLink="/cars/rental/{{ car.id }}"
+          type="button"
+          class="btn btn-light"
+        >
+          Kirala
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,6 +1,22 @@
 thead {
-    background-color:#dc3545;
+    background-color:white;
     color:white;
     font-weight: bold;
     letter-spacing: 1px; 
  }
+ .sidebar-title {
+   background-color:#FFC107;
+   color:black;
+   letter-spacing: 1px; 
+}
+
+ ul
+{
+   list-style-type: none;
+   padding-left: 0;
+}
+
+.active{
+   background-color:rgba(156, 154, 154, 0.247);
+   color: black;
+}

@@ -1,19 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CustomerDto } from 'src/app/models/Customer/customerDto';
+import { CarImage } from 'src/app/models/CarImage/carImage';
 import { ListResponseModel } from 'src/app/models/listResponseModel';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class CarImagesByIdService {
 
   apiUrl="https://localhost:44316/api/"
   constructor(private httpClient:HttpClient) { }
 
-  getCustomers():Observable<ListResponseModel<CustomerDto>>{
-    let newPath:string=this.apiUrl+"customers/getcustomerdetails"
-     return this.httpClient.get<ListResponseModel<CustomerDto>>(newPath);
+  getCarImagesById(id:number):Observable<ListResponseModel<CarImage>>{
+    let newPath=this.apiUrl+"carImages/getallimagebycarid?id="+id
+    return this.httpClient.get<ListResponseModel<CarImage>>(newPath)
   }
 }

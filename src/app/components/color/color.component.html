@@ -1,14 +1,15 @@
-<div class="rounded-0 mt-4">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Renk</th>
-      </tr>
-    </thead>
-    <tr *ngFor="let color of colors">
-      <td>{{ color.colorId }}</td>
-      <td>{{ color.colorName }}</td>
-    </tr>
-  </table>
-</div>
+
+<ul>
+  <div class="list-group rounded-0 mt-4">
+    <li><div class="list-group-item sidebar-title">COLORS</div></li>
+    <li 
+      (click)="setAllColor()"
+      [class]="getAllColorClass()" 
+      routerLink="cars">All Colors</li>
+
+    <li (click)="setCurrentColor(color)"
+    routerLink="cars/color/{{color.colorId}}"
+     [class]="getCurrentColorClass(color)"
+     *ngFor="let color of colors">{{color.colorName}}</li>
+  </div>
+</ul>
