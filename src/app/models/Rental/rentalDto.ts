@@ -9,5 +9,11 @@ export interface RentalDto{
     lastName:string;
     companyName:string;
     rentDate:Date;
+    estReturnDate?:Date;
     returnDate?:Date;
+    totalPaye:number;
+    cardNameSurname:string;
+    cardNumber:string;
+    cardExpiryDate:string;
+    cardCvv:string;
 }

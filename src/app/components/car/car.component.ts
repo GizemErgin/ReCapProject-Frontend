@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarDto } from 'src/app/models/Car/carDto';
 import { CarImage } from 'src/app/models/CarImage/carImage';
 import { CarService } from 'src/app/services/Car/car.service';
@@ -12,13 +12,14 @@ import { CarImagesByIdService } from 'src/app/services/CarImage/car-images-by-id
 })
 export class CarComponent implements OnInit {
   cars: CarDto[] = [];
+  filterText="";
 
   constructor(
     private carService:CarService, 
-    private activatedRoot:ActivatedRoute) {}
+    private activatedRoute:ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoot.params.subscribe(params=>{
+    this.activatedRoute.params.subscribe(params=>{
       if(params["brandId"]){
         this.getCarsByBrand(params["brandId"])
       }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CarDto } from 'src/app/models/Car/carDto';
+import { CarService } from 'src/app/services/Car/car.service';
 
 @Component({
   selector: 'app-navi',
@@ -7,11 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NaviComponent implements OnInit {
 
+
   title:string = 'Rent A Car';
-  
-  constructor() { }
+
+
+  constructor(private carService:CarService) { }
 
   ngOnInit(): void {
+
   }
 
 }
+

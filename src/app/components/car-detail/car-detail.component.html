@@ -49,7 +49,7 @@
                 <th>Model Yılı</th>
                 <th>Fiyat</th>
                 <th>Açıklama</th>
-                <th>Kirala..</th>
+                <th>Kirala</th>
                 
      
             </tr>
@@ -59,7 +59,7 @@
             <td>{{carDetails.brandName}}</td>
             <td>{{carDetails.colorName}}</td>
             <td>{{carDetails.modelYear}}</td>
-            <td>{{carDetails.dailyPrice}}</td>
+            <td>{{carDetails.dailyPrice | vatAdded:18}}</td>
             <td>{{carDetails.description}}</td>
             <td ><button routerLink="/cars/rental/{{carDetails.id}}"  type="button" class="btn btn-outline-success">Kirala</button></td>
           

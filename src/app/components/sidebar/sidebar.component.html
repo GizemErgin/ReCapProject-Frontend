@@ -1,14 +1,35 @@
-<ul>
-  <div class="list-group rounded-0 mt-4">
-    <li><div class="list-group-item sidebar-title">BRANDS</div></li>
-    <li *ngFor="let brand of brands" class="list-group-item">{{brand.brandName}}</li>
+<div class="rounded-0 mt-4">
+    <ul class="list-group">
+      <li class="list-group-item sidebar-title">BRANDS</li>
+      <li
+        (click)="setAllBrand()"
+        [class]="getAllBrandClass()"
+        routerLink="cars"
+      >
+        All Brands
+      </li>
+      <li
+        (click)="setCurrentBrand(brand)"
+        *ngFor="let brand of brands"
+        [class]="getCurrentBrandClass(brand)"
+      >
+        {{ brand.brandName }}
+      </li>
+    </ul>
   </div>
-</ul>
 
-<ul>
-  <div class="list-group rounded-0 mt-4">
-    <li><div class="list-group-item sidebar-title">BRANDS</div></li>
-    <li *ngFor="let color of colors" class="list-group-item">{{color.colorName}}</li>
-  </div>
-</ul>
-
+<div>
+<ul class="list-group">
+    <div class="list-group rounded-0 mt-4">
+      <li><div class="list-group-item sidebar-title">COLORS</div></li>
+      <li 
+        (click)="setAllColor()"
+        [class]="getAllColorClass()" 
+        routerLink="cars">All Colors</li>
+  
+      <li (click)="setCurrentColor(color)"
+       [class]="getCurrentColorClass(color)"
+       *ngFor="let color of colors">{{color.colorName}}</li>
+    </div>
+  </ul>
+</div>  

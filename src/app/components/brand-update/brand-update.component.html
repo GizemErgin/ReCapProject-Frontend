@@ -1,0 +1,28 @@
+<div class="content rounded-0 mt-4">
+    <div class="col-md-12">
+        <div class="brand">
+            <div class="card-header"><h5 class="title">Marka Güncelle</h5></div>
+            <div class="card-body">
+                <form [formGroup]="brandUpdateForm">
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="brandId">Marka Id:</label>
+                            <input type="number" id="brandId" formControlName="brandId" class="form-control" aria-label="Marka"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="brandId">Marka Adı:</label>
+                            <select id="brandId" formControlName="brandId" class="form-select" aria-label="Marka">
+                                <option *ngFor="let brand of brands" [ngValue]="brand.brandId">{{brand.brandName}}</option>
+                            </select>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end">
+                            <button class="btn btn-fill btn-warning btn-lg" (click)="update()">
+                                Güncelle
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

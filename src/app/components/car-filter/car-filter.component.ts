@@ -29,17 +29,9 @@ export class CarFilterComponent implements OnInit {
       this.colors=response.data;
     })
   }
-  selectedColor(colorId:number){
-    if(this.colorIdFilter==colorId){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
 
-  selectedBrand(brandId:number){
-    if(this.brandIdFilter==brandId){
+  selectedColor(colorId:any){
+    if(this.colorIdFilter==colorId){
       return true;
     }
     else{
@@ -51,6 +43,19 @@ export class CarFilterComponent implements OnInit {
     this.brandService.getBrands().subscribe(response=>{
       this.brands=response.data;
     })
+  }
+
+  selectedBrand(brandId:any){
+    if(this.brandIdFilter==brandId){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  deneme(){
+    if(this.brandIdFilter){}
   }
 
 }

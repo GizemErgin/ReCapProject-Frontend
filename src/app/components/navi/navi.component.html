@@ -7,13 +7,34 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li clas="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="rentals" >Rents</a>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="cars" >Anasayfa</a>
         </li>
-        <li><a class="nav-link active" aria-current="page" routerLink="customers" >Customers</a>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Ekle
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="cars/add">Araç Ekle</a></li>
+            <li><a class="dropdown-item" routerLink="brands/add">Marka Ekle</a></li>
+            <li><a class="dropdown-item" routerLink="colors/add">Renk Ekle</a></li>
+          </ul>
         </li>
-        <li><a class="nav-link active" aria-current="page" routerLink="cars" >Cars</a>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Listele
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="carslist">Araç Listele</a></li>
+            <li><a class="dropdown-item" routerLink="brandslist">Marka Listele</a></li>
+            <li><a class="dropdown-item" routerLink="colorslist">Renk Listele</a></li>
+            <li><a class="dropdown-item" routerLink="customers">Müşteri Listele</a></li>
+            <li><a class="dropdown-item" routerLink="rentalslist">Kiralanan Araç Listele</a></li>
+          </ul>
         </li>
+
         <!-- <li><a class="nav-link active" aria-current="page" routerLink="brands" style="color:white">Brands</a> 
         </li>
         <li><a class="nav-link active" aria-current="page" routerLink="colors" style="color:white">Colors</a>

@@ -1,0 +1,51 @@
+<div class="content rounded-0 mt-4">
+    <div class="col-md-12">
+        <div class="car">
+            <div class="card-header"><h5 class="title">Araç Güncelle</h5></div>
+            <div class="card-body">
+                <form [formGroup]="carUpdateForm">
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="brandId">Marka:</label>
+                            <select id="brandId" formControlName="brandId" class="form-select" aria-label="Marka">
+                                <option *ngFor="let brand of brands" [ngValue]="brand.brandId">{{brand.brandName}}</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="colorId">Renk:</label>
+                            <select id="colorId" formControlName="colorId" class="form-select" aria-label="Renk">
+                                <option *ngFor="let color of colors" [ngValue]="color.colorId">{{color.colorName}}</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modelYear">Model Yılı:</label> 
+                            <input type="number" id="modelYear" formControlName="modelYear" class="form-control" placeholder="Model Yılı"/> 
+                        </div>
+                        <div class="mb-3">
+                            <label for="dailyPrice">Günlük Fiyat:</label>   
+                        <input type="number" id="dailyPrice" formControlName="dailyPrice" class="form-control" placeholder="Günlük Fiyat"/> 
+                        </div>
+                        <div class="mb-3">
+                            <label for="description">Açıklama:</label> 
+                        <input type="text" id="description" formControlName="description" class="form-control" placeholder="Açıklama"/>    
+                        </div>
+
+                        <!-- <div class="mb-3">
+                            <div class="form-group">
+                                <label for="carImage" class="form-label">Araç Resmi</label>
+                                <input type="file" id="carImage" formControlName="carImage" 
+                                (change)="onFileChange($event)" accept="image/x-png,image/jpeg" class="form-control" multiple>
+                            </div>
+                        </div> -->
+
+                        <div class="card-footer d-flex justify-content-end">
+                            <button class="btn btn-fill btn-warning btn-lg" (click)="update()" >
+                                Güncelle
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

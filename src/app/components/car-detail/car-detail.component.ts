@@ -34,7 +34,7 @@ export class CarDetailComponent implements OnInit {
       if(params["id"]){
         this.getCarsById(params["id"])
         this.getImagesById(params["id"])
-        // this.getRentalsByCarId(params["id"])
+        this.getRentalsByCarId(params["id"])
         
       }
       this.getRentals()
@@ -64,7 +64,7 @@ export class CarDetailComponent implements OnInit {
     })
   }
  
-  check(id:number){
+  check(id:number){ //service yaz ve backend yaz ve html kısmını ekle
    this.rentals.find(function(element){
      if(element.carId===id && element.returnDate===null){
        return false //arac kiralanamaz

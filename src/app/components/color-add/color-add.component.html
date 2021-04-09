@@ -1,0 +1,20 @@
+<div class="content rounded-0 mt-4">
+    <div class="brand">
+        <div class="card-header"><h5 class="title">Renk Ekle</h5></div>
+        <div class="card-body">
+            <form [formGroup]="colorAddForm">
+                <div class="form-group">
+                    <div class="mb-3">
+                        <label for="colorName">Renk Adı:</label>
+                        <input type="text" id="colorName" formControlName="colorName" class="form-control" placeholder="Renk"/>
+                    </div>
+                    <div class="card-footer d-flex justify-content-end">
+                        <button class="btn btn-fill btn-warning btn-lg" (click)="add()" >
+                            Ekle
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

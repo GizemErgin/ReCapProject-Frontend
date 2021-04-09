@@ -1,12 +1,21 @@
+thead {
+  background-color: bg-light;
+  color:white;
+  font-weight: bold;
+  letter-spacing: 1px; 
+}
 .sidebar-title {
-    background-color:#dc3545;
-    color:white;
-    font-weight: bold;
-    letter-spacing: 1px; 
- }
+  background-color:#FFC107;
+  color:black;
+  letter-spacing: 1px; 
+}
 
- ul
+ul
 {
-        list-style-type: none;
-        padding-left: 0;
+      list-style-type: none;
+      padding-left: 0;
+}
+.active{
+ background-color:rgba(156, 154, 154, 0.247);
+ color: black;
 }

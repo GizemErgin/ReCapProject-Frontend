@@ -1,0 +1,40 @@
+<div class="car">
+    <div class="panel-footer text-center">
+      <span class="d-block p-1 bg-warning text-white" style="margin-top: 25px"
+        ><h5>Araçlar</h5></span
+      >
+    </div>
+    
+    <table
+      *ngIf="dataLoaded == true"
+      id="example"
+      class="table table-striped table-bordered"
+      cellspacing="0"
+      width="100%"
+      style="text-align: center;"
+    >
+      <thead>
+        <tr>
+          <th>Id</th>
+            <th>Marka</th>
+            <th>Renk</th>
+            <th>Model Yılı</th>
+            <th>Fiyat</th>
+            <th>Açıklama</th>
+            <th>Güncelle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of cars">
+          <td>{{ car.id }}</td>
+          <td>{{ car.brandName }}</td>
+          <td>{{car.colorName}}</td>
+          <td>{{car.modelYear}}</td>
+          <td>{{car.dailyPrice | vatAdded:18}}</td>
+          <td>{{car.description}}</td>
+          <td ><button  type="button" class="btn btn-outline-dark" routerLink="/cars/update/{{car.id}}">Güncelle</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,32 @@
+<div class="brand">
+    <div class="panel-footer text-center">
+      <span class="d-block p-1 bg-warning text-white" style="margin-top: 25px"
+        ><h5>Markalar</h5></span
+      >
+    </div>
+    
+    <table
+      *ngIf="dataLoaded == true"
+      id="example"
+      class="table table-striped table-bordered"
+      cellspacing="0"
+      width="100%"
+      style="text-align: center;"
+    >
+      <thead>
+        <tr>
+          <th>Id</th>
+            <th>Marka</th>
+            <th>Güncelle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let brand of brands">
+          <td>{{ brand.brandId }}</td>
+          <td>{{ brand.brandName }}</td>
+          <td ><button routerLink="/brands/update/{{brand.brandId}}"  type="button" class="btn btn-outline-dark">Güncelle</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

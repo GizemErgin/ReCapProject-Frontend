@@ -1,6 +1,5 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Brand } from 'src/app/models/Brand/brand';
 import { BrandService } from 'src/app/services/Brand/brand.service';
 
@@ -48,7 +47,7 @@ export class BrandComponent implements OnInit {
   }
 
   setAllBrand(){
-    return this.currentBrand={brandId:0, brandName:" "};
+    return this.currentBrand={brandId:0, brandName:""};
   }
 
 

@@ -1,0 +1,32 @@
+<div class="color">
+    <div class="panel-footer text-center">
+      <span class="d-block p-1 bg-warning text-white" style="margin-top: 25px"
+        ><h5>Renkler</h5></span
+      >
+    </div>
+    
+    <table
+      *ngIf="dataLoaded == true"
+      id="example"
+      class="table table-striped table-bordered"
+      cellspacing="0"
+      width="100%"
+      style="text-align: center;"
+    >
+      <thead>
+        <tr>
+          <th>Id</th>
+            <th>Renk</th>
+            <th>Güncelle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let color of colors">
+          <td>{{ color.colorId }}</td>
+          <td>{{ color.colorName }}</td>
+          <td ><button routerLink="/colors/update/{{color.colorId}}"  type="button" class="btn btn-outline-dark">Güncelle</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

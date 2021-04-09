@@ -1,37 +1,47 @@
-<div class="rounded-0 mt-4">
-  <app-car-filter></app-car-filter>
-  <div class="row px-2">
-    <div *ngFor="let car of cars" class="card mx-2" style="width: 14rem">
-      <img
-        src="https://localhost:44316/{{car.imagePath}}"
-        class="card-img-top"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">{{ car.description }}</h5>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Id: {{ car.id }}</li>
-        <li class="list-group-item">Marka: {{ car.brandName }}</li>
-        <li class="list-group-item">Renk: {{ car.colorName }}</li>
-        <li class="list-group-item">Fiyat: {{ car.dailyPrice }} TL</li>
-      </ul>
-      <div class="card-body">
-        <button
-          routerLink="/cars/car-detail/{{ car.id }}"
-          type="button"
-          class="btn btn-light"
-        >
-          Detaylar
-        </button>
-        <button
-          routerLink="/cars/rental/{{ car.id }}"
-          type="button"
-          class="btn btn-light"
-        >
-          Kirala
-        </button>
+<div class="rounded-0 mt-3">
+  <div class="row">
+<!-- <div class="col-md-2">
+  <app-sidebar></app-sidebar>
+</div> -->
+
+  <div class="mb-3 mt-2">
+    <label for="filterText" class="form-label">Araba Ara</label>
+    <input type="text" class="form-control" id="filterText" placeholder="arama ifadesi giriniz"
+      [(ngModel)]="filterText">
+  </div>
+
+  <div class="mb-3">
+    <app-car-filter></app-car-filter>
+  </div>
+
+  <div class="album py-4 bg-light">
+    <div class="row">
+
+      <div class="card mx-auto mb-4 box-shadow" *ngFor="let car of cars | filterPipe : filterText" style="width: 20rem">
+        <img src="https://localhost:44316/{{ car.imagePath }}" class="card-img-top" alt="..." width="500"
+          height="180" />
+        <div class="card-body">
+          <h5 class="card-title">{{ car.description }}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <!-- <li class="list-group-item">Id: {{ car.id }}</li> -->
+          <li class="list-group-item">Marka: {{ car.brandName }}</li>
+          <!-- <li class="list-group-item">Renk: {{ car.colorName }}</li> -->
+          <li class="list-group-item">Fiyat: {{ car.dailyPrice | vatAdded:18 | currency:"₺"}}</li>
+        </ul>
+        <div class="d-flex justify-content-end align-items-center">
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary" routerLink="/cars/car-detail/{{ car.id }}">
+              Detaylar
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" routerLink="/cars/rental/{{ car.id }}">
+              Kirala
+            </button>
+          </div>
+          <br /><br />
+        </div>
       </div>
     </div>
   </div>
+</div>
 </div>

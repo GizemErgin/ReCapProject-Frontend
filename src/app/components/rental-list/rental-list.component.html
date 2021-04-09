@@ -1,0 +1,42 @@
+<div class="rental">
+  <div class="panel-footer text-center">
+    <span class="d-block p-1 bg-warning text-white" style="margin-top: 25px"
+      ><h5>Kiralanan Araçlar</h5></span
+    >
+  </div>
+  
+  <table
+    *ngIf="dataLoaded == true"
+    id="example"
+    class="table table-striped table-bordered"
+    cellspacing="0"
+    width="100%"
+  >
+    <thead>
+      <tr>
+        <th>Id</th>
+          <th>Marka</th>
+          <th>Model Yılı</th>
+          <th>Günlük Ücret</th>
+          <th>Müşteri Adı Soyadı</th>
+          <th>Şirket Adı</th>
+          <th>Kiralama Tarihi</th>
+          <th>Teslim Tarihi</th>
+          <th>Ödenen Ücret</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rental of rentals">
+        <td>{{ rental.id }}</td>
+        <td>{{ rental.brandName }}</td>
+            <td>{{ rental.modelYear }}</td>
+            <td>{{ rental.dailyPrice | vatAdded:18 | currency:"₺" }}</td>
+            <td>{{ rental.firstName }} {{ rental.lastName }}</td>
+            <td>{{ rental.companyName }}</td>
+            <td>{{ rental.rentDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ rental.estReturnDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ rental.totalPaye | currency:"₺" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

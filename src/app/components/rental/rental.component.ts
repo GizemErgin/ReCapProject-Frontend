@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CarDto } from 'src/app/models/Car/carDto';
 import { CustomerDto } from 'src/app/models/Customer/customerDto';
+import { Rental } from 'src/app/models/Rental/rental';
 import { RentalDto } from 'src/app/models/Rental/rentalDto';
-import { CarService } from 'src/app/services/Car/car.service';
 import { CarDetailByIdService } from 'src/app/services/CarDetail/car-detail-by-id.service';
 import { CustomerService } from 'src/app/services/Customer/customer.service';
+import { PaymentService } from 'src/app/services/Payment/payment.service';
 import { RentalService } from 'src/app/services/Rental/rental.service';
 
 @Component({
@@ -15,97 +17,101 @@ import { RentalService } from 'src/app/services/Rental/rental.service';
 })
 export class RentalComponent implements OnInit {
 
-  rentals:RentalDto[]=[];
-  rentalsAdd:RentalDto;
-  rentalsByCarId:RentalDto[]=[];
-  cars:CarDto[];
-  carDetails:CarDto;
-  customers:CustomerDto[];
-  customerDetail:CustomerDto;
-  description:string;
-  dailyPrice:number;
-  firstName:string;
-  lastName:string;
-  companyName:string;
-  rentDate:Date;
-  returnDate:Date;
-  result:number;
-  
+  rentals: RentalDto[] = [];
+  rentalsByCarId: RentalDto[] = [];
+  carDetails: CarDto;
+  customers: CustomerDto[];
+  customerDetail: CustomerDto;
 
-  constructor(private rentalService:RentalService, 
-    private activatedRoute:ActivatedRoute,
-    private carService:CarService,
-    private carDetailByIdService:CarDetailByIdService,
-    private customerService:CustomerService,
-    private router:Router,
-    ) { }
+  customerId: number;
+  rentDate: Date;
+  estReturnDate: Date;
+  totalPaye: number;
 
+  constructor(private rentalService: RentalService,
+    private activatedRoute: ActivatedRoute,
+    private carDetailByIdService: CarDetailByIdService,
+    private customerService: CustomerService,
+    private router: Router,
+    private paymentService: PaymentService,
+    private toastrService: ToastrService
+  ) { }
 
-    
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params=>{
-      if(params["id"]){
+    this.activatedRoute.params.subscribe(params => {
+      if (params["id"]) {
         this.getCarsById(params["id"])
-        
-      }
-         this.getRentals()
-         this.getCars();
-    
-  })}
 
-  getRentals(){
-    this.rentalService.getRentals().subscribe(response=>{
-      this.rentals=response.data;
+      }
+      this.getRentals();
+      this.getCustomer();
+
     })
   }
 
-  getCustomer(){
+  getRentals() {
+    this.rentalService.getRentals().subscribe(response => {
+      this.rentals = response.data;
+    })
+  }
+
+  getCustomer() {
     this.customerService.getCustomers().subscribe(response => {
       this.customers = response.data;
-      
+      console.log(this.customers)
     })
   }
-  getRentDate(){
-    var today  = new Date();
-    //min="1980-01-01"
+  getRentDate() {
+    var today = new Date();
     today.setDate(today.getDate() + 1);
-    return today.toISOString().slice(0,10)
+    return today.toISOString().slice(0, 10)
   }
-  getReturnDate(){
-    var today  = new Date();
+  getReturnDate() {
+    var today = new Date();
     today.setDate(today.getDate() + 2);
-    return today.toISOString().slice(0,10)
+    return today.toISOString().slice(0, 10)
   }
 
-  createRental(){
-    let MyRental:RentalDto = {
-      id:this.rentalsAdd.id,
-      rentDate: this.rentDate,
-      returnDate: this.returnDate,
+
+  getCarsById(id: number) {
+    this.carDetailByIdService.getCarDetailById(id).subscribe(response => {
+      this.carDetails = response.data[0];
+    })
+  }
+
+  createRental() {
+    let MyRental: Rental = {
       carId: this.carDetails.id,
-      modelYear: this.carDetails.modelYear,
-      brandName: this.carDetails.brandName,
-      description:this.carDetails.description,
-      dailyPrice:this.carDetails.dailyPrice,
-      firstName:this.customerDetail.firstName,
-      lastName: this.customerDetail.lastName,
-      companyName: this.customerDetail.companyName
+      rentDate: this.rentDate,
+      estReturnDate: this.estReturnDate,
+      customerId: parseInt(this.customerId.toString())
+    }
+
+    this.rentalService.checkCarStatus(MyRental).subscribe(
+      (response) => {
+        this.toastrService.success(response.message.toString(), 'Tarihler Uygun');
+
+
+        var date1 = new Date(this.estReturnDate.toString());
+        var date2 = new Date(this.rentDate.toString());
+        var difference = date1.getTime() - date2.getTime();
+        var numberOfDays = Math.ceil(difference / (1000 * 3600 * 24));
+        this.totalPaye = numberOfDays * (this.carDetails.dailyPrice + (this.carDetails.dailyPrice * 18 / 100));
+
+        this.paymentService.setRentalCar(MyRental, this.totalPaye);
+
+        console.log(MyRental);
+        console.log(this.totalPaye);
+        setTimeout(() => {
+          this.toastrService.info("Ödeme sayfasına yönlendiriliyorsunuz...", "Ödeme İşlemleri");
+          this.router.navigate(['/payments']);
+        }, 2000)
+      },
+      (responseError)=>
+      {
+        this.toastrService.error(responseError.error.message,"Hata");
       }
-    this.router.navigate(['/payment/', JSON.stringify(MyRental)]);
-   // this.toastr.info("Ödeme sayfasına yönlendiriliyorsunuz...", "Ödeme İşlemleri");
-    
+    );
   }
-  getCars(){
-    this.carService.getCars().subscribe(response=>{
-      this.cars=response.data;
-    })
-  }
-
-  getCarsById(id:number){
-    this.carDetailByIdService.getCarDetailById(id).subscribe(response=>{
-      this.carDetails=response.data[0];
-    })
-  }
-
 }
