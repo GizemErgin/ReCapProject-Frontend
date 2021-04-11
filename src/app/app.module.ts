@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +30,12 @@ import { ColorListComponent } from './components/color-list/color-list.component
 import { CarUpdateComponent } from './components/car-update/car-update.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
+import { CustomerUpdateComponent } from './components/customer-update/customer-update.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthInterceptor } from './components/interceptors/auth.interceptor';
+import { UserComponent } from './components/user/user.component';
+import { CustomerAddComponent } from './components/customer-add/customer-add.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +62,11 @@ import { BrandUpdateComponent } from './components/brand-update/brand-update.com
     CarUpdateComponent,
     ColorUpdateComponent,
     BrandUpdateComponent,
+    CustomerUpdateComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserComponent,
+    CustomerAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +79,9 @@ import { BrandUpdateComponent } from './components/brand-update/brand-update.com
       positionClass:"toast-bottom-right"
     })
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

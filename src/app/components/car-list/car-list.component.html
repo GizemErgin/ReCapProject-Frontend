@@ -1,6 +1,6 @@
 <div class="car">
     <div class="panel-footer text-center">
-      <span class="d-block p-1 bg-warning text-white" style="margin-top: 25px"
+      <span class="d-block p-1 bg-light text-black" style="margin-top: 25px"
         ><h5>Araçlar</h5></span
       >
     </div>
@@ -21,6 +21,7 @@
             <th>Model Yılı</th>
             <th>Fiyat</th>
             <th>Açıklama</th>
+            <th>Findeks Puanı</th>
             <th>Güncelle</th>
         </tr>
       </thead>
@@ -32,6 +33,7 @@
           <td>{{car.modelYear}}</td>
           <td>{{car.dailyPrice | vatAdded:18}}</td>
           <td>{{car.description}}</td>
+          <td>{{car.findeks}}</td>
           <td ><button  type="button" class="btn btn-outline-dark" routerLink="/cars/update/{{car.id}}">Güncelle</button></td>
         </tr>
       </tbody>

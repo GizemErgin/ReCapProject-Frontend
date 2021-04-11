@@ -1,40 +1,39 @@
-<div class="rounded-0 mt-3">
+<div class="rounded-0 mt-2">
   <div class="row">
-<!-- <div class="col-md-2">
-  <app-sidebar></app-sidebar>
-</div> -->
 
-  <div class="mb-3 mt-2">
+
+  <div class="mb-3 mt-2 px-1" style="width: 68rem;">
     <label for="filterText" class="form-label">Araba Ara</label>
     <input type="text" class="form-control" id="filterText" placeholder="arama ifadesi giriniz"
       [(ngModel)]="filterText">
   </div>
 
-  <div class="mb-3">
+  <div class="mb-3" style="width: 68rem;">
     <app-car-filter></app-car-filter>
   </div>
 
-  <div class="album py-4 bg-light">
+  <div class="album py-3 px-0" style="width: 68rem;">
     <div class="row">
 
-      <div class="card mx-auto mb-4 box-shadow" *ngFor="let car of cars | filterPipe : filterText" style="width: 20rem">
+      <div class="card mx-3 p-3 mb-4 box-shadow" *ngFor="let car of cars | filterPipe : filterText" style="width: 21rem">
         <img src="https://localhost:44316/{{ car.imagePath }}" class="card-img-top" alt="..." width="500"
           height="180" />
         <div class="card-body">
           <h5 class="card-title">{{ car.description }}</h5>
         </div>
         <ul class="list-group list-group-flush">
-          <!-- <li class="list-group-item">Id: {{ car.id }}</li> -->
+          <li class="list-group-item" [(ngModel)]="carId">Id: {{ car.id }}</li>
           <li class="list-group-item">Marka: {{ car.brandName }}</li>
           <!-- <li class="list-group-item">Renk: {{ car.colorName }}</li> -->
           <li class="list-group-item">Fiyat: {{ car.dailyPrice | vatAdded:18 | currency:"₺"}}</li>
+          <li class="list-group-item">Findeks Puanı: {{ car.findeks }}</li>
         </ul>
         <div class="d-flex justify-content-end align-items-center">
           <div class="btn-group">
             <button type="button" class="btn btn-sm btn-outline-secondary" routerLink="/cars/car-detail/{{ car.id }}">
               Detaylar
             </button>
-            <button type="button" class="btn btn-sm btn-outline-secondary" routerLink="/cars/rental/{{ car.id }}">
+            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="isCustomer()" routerLink="/cars/rental/{{car.id}}">
               Kirala
             </button>
           </div>

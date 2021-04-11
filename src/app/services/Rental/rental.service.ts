@@ -26,7 +26,7 @@ export class RentalService {
   }
   getRentalsByCarId(carId:number):Observable<ListResponseModel<RentalDto>>
   {
-    let newPath=this.apiUrl+"getrentaldetailsbycarid?carId="+carId;
+    let newPath=this.apiUrl+"rentals/getrentaldetailsbycarid?carId="+carId;
     return this.httpClient.get<ListResponseModel<RentalDto>>(newPath);
   }
 

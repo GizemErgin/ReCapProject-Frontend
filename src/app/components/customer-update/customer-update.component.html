@@ -1,0 +1,34 @@
+<div class="content rounded-0 mt-4">
+    <div class="col-md-12">
+        <div class="customer">
+            <div class="card-header"><h5 class="title">Müşteri Güncelle</h5></div>
+            <div class="card-body">
+                <form [formGroup]="customerUpdateForm">
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="id">Müşteri Id:</label>
+                            <input type="number" id="id" formControlName="id" class="form-control" aria-label="Müşteri"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstName">Müşteri Adı:</label>
+                            <input type="text" id="firstName" formControlName="firstName" class="form-control" aria-label="Müşteri Adı"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName">Müşteri Soyadı:</label>
+                            <input type="text" id="lastName" formControlName="lastName" class="form-control" aria-label="Müşteri Soyadı"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="companyName">Şirket:</label>
+                            <input type="text" id="companyName" formControlName="companyName" class="form-control" aria-label="Şirket"/>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end">
+                            <button class="btn btn-fill btn-warning btn-lg" (click)="update()">
+                                Güncelle
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

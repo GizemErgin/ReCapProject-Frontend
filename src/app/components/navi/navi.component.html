@@ -1,32 +1,40 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-warning">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">{{title}}</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="cars" >Anasayfa</a>
-        </li>
+<style>
+  .gizle{
+      display:none;
+  }
+</style>
 
+<nav class="navbar">
+<header class="d-flex p-3 bg-dark text-white" style="width: 100%;">
+  <div class="container-fluid">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <!-- <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+      </a> -->
+      <a class="navbar-brand" href="#">{{title}}</a>
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a routerLink="cars" class="nav-link px-2 text-white">Anasayfa</a></li>
+
+        <div [class]="isAdmin()">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;" >
             Ekle
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="cars/add">Araç Ekle</a></li>
             <li><a class="dropdown-item" routerLink="brands/add">Marka Ekle</a></li>
             <li><a class="dropdown-item" routerLink="colors/add">Renk Ekle</a></li>
           </ul>
         </li>
+      </div>
 
+      <div [class]="isAdmin()">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
             Listele
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="carslist">Araç Listele</a></li>
             <li><a class="dropdown-item" routerLink="brandslist">Marka Listele</a></li>
             <li><a class="dropdown-item" routerLink="colorslist">Renk Listele</a></li>
@@ -34,33 +42,55 @@
             <li><a class="dropdown-item" routerLink="rentalslist">Kiralanan Araç Listele</a></li>
           </ul>
         </li>
+      </div>
 
-        <!-- <li><a class="nav-link active" aria-current="page" routerLink="brands" style="color:white">Brands</a> 
-        </li>
-        <li><a class="nav-link active" aria-current="page" routerLink="colors" style="color:white">Colors</a>
-        </li> -->
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/GizemErgin" target="_blank" >Github</a>
+          <a class="nav-link" href="https://github.com/GizemErgin" target="_blank" style="color: white;">Github</a>
         </li>
-        <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li> -->
       </ul>
+     
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light btn-round" type="submit">Search</button>
+        <input type="search" class="form-control form-control-dark" placeholder="Search...">
       </form>
+
+      <div [class]="isLogin()">
+      <div class="d-flex">
+        <button type="button" class="btn btn-outline-light mx-2 me-2" routerLink="login">Giriş Yap</button>
+        <button type="button" class="btn btn-warning" routerLink="register">Kayıt Ol</button>
+      </div>
     </div>
+
+    <div *ngIf="checkToLogin() == true" class="dropdown mx-2">
+      <a
+        class="btn btn-warning dropdown-toggle"
+        role="button"
+        id="dropdownMenuLink"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+      {{getUser().firstName}} {{getUser().lastName}}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item"routerLink="/profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg> 
+          Kullanıcı Ayarları</a></li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <a type="button" class="dropdown-item" (click)="logOut()"
+            > <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+              <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg> Çıkış Yap</a
+          >
+        </li>
+      </ul>
+    </div> 
+
+
   </div>
+  </div>
+</header>
 </nav>

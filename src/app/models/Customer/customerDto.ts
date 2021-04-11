@@ -1,6 +1,7 @@
 export interface CustomerDto{
-    id:number;
+    id?:number;
     firstName:string;
     lastName:string;
     companyName:string;
+    findeks:number;
 }

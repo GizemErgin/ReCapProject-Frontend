@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col col-5">
+    <div class="col col-5 px-1">
       <select [(ngModel)]="brandIdFilter"  class="form-select" aria-label="Default select example">
         <option *ngFor="let brand of brands" [value]="brand.brandId"
         selected="{{selectedBrand(brand.brandId)}}">{{brand.brandName}}</option>
@@ -13,12 +13,12 @@
         
       </select>
     </div>
-    <div class="col col-1 px-0">
+    <div class="col col-1 px-2">
       <a 
       routerLink="/cars/filter/{{brandIdFilter}}/{{colorIdFilter}}" 
        class="btn btn-warning">Filtrele</a>
       </div>
-      <div class="col col-1 px-0">
+      <div class="col col-1 px-2">
           <a 
           routerLink="cars" class="btn btn-danger">Temizle</a>
       </div>

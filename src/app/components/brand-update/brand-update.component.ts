@@ -42,8 +42,13 @@ export class BrandUpdateComponent implements OnInit {
     this.brandService.getBrandById(brandId).subscribe(response=>{
       this.updateBrand=response.data;
 
+      console.log(this.updateBrand)
+      console.log(this.updateBrand.brandId)
+
       this.brandUpdateForm.get("brandId")?.setValue(this.updateBrand.brandId);
       this.brandUpdateForm.get("brandName")?.setValue(this.updateBrand.brandName);
+
+      console.log(this.brandUpdateForm)
     })
   }
 

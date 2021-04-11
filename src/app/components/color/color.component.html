@@ -1,15 +1,30 @@
-
-<ul>
-  <div class="list-group rounded-0 mt-4">
-    <li><div class="list-group-item sidebar-title">COLORS</div></li>
-    <li 
+  <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+<div class="rounded-0 mt-4 " style="width: 170px;">
+  <ul class="list-group">
+    <li class="list-group-item sidebar-title bg-dark h5">Renkler</li>
+    <hr> 
+    <div class="d-flex flex-column p-1" style="width: 170px;">
+  
+    <li
       (click)="setAllColor()"
-      [class]="getAllColorClass()" 
-      routerLink="cars">All Colors</li>
-
-    <li (click)="setCurrentColor(color)"
-    routerLink="cars/color/{{color.colorId}}"
-     [class]="getCurrentColorClass(color)"
-     *ngFor="let color of colors">{{color.colorName}}</li>
+      [class]="getAllColorClass()"
+      routerLink="/cars"
+    >
+      Tüm Renkler
+    </li>
+    <li
+      (click)="setCurrentColor(color)"
+      routerLink="cars/color/{{color.colorId}}"
+      *ngFor="let color of colors"
+      [class]="getCurrentColorClass(color)"
+    >
+      {{ color.colorName }}
+    </li>
   </div>
-</ul>
+  </ul>
+
+</div>
+  </div>
+
+
+

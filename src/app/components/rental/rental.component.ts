@@ -7,8 +7,10 @@ import { Rental } from 'src/app/models/Rental/rental';
 import { RentalDto } from 'src/app/models/Rental/rentalDto';
 import { CarDetailByIdService } from 'src/app/services/CarDetail/car-detail-by-id.service';
 import { CustomerService } from 'src/app/services/Customer/customer.service';
+import { LocalStorageService } from 'src/app/services/LocalStorage/localstorage.service';
 import { PaymentService } from 'src/app/services/Payment/payment.service';
 import { RentalService } from 'src/app/services/Rental/rental.service';
+import { UserService } from 'src/app/services/User/user.service';
 
 @Component({
   selector: 'app-rental',
@@ -34,7 +36,7 @@ export class RentalComponent implements OnInit {
     private customerService: CustomerService,
     private router: Router,
     private paymentService: PaymentService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
   ) { }
 
 
@@ -42,11 +44,9 @@ export class RentalComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if (params["id"]) {
         this.getCarsById(params["id"])
-
       }
       this.getRentals();
       this.getCustomer();
-
     })
   }
 
@@ -88,30 +88,40 @@ export class RentalComponent implements OnInit {
       customerId: parseInt(this.customerId.toString())
     }
 
-    this.rentalService.checkCarStatus(MyRental).subscribe(
-      (response) => {
-        this.toastrService.success(response.message.toString(), 'Tarihler Uygun');
+    console.log(this.customerId);
+    this.customerService.getCustomerById(this.customerId).subscribe(response=>{    
 
+    if(response.data.findeks>=this.carDetails.findeks){
+      this.toastrService.success("Findeks puanınız kiralama işlemi için uygundur.","Başarılı");
 
-        var date1 = new Date(this.estReturnDate.toString());
-        var date2 = new Date(this.rentDate.toString());
-        var difference = date1.getTime() - date2.getTime();
-        var numberOfDays = Math.ceil(difference / (1000 * 3600 * 24));
-        this.totalPaye = numberOfDays * (this.carDetails.dailyPrice + (this.carDetails.dailyPrice * 18 / 100));
+      this.rentalService.checkCarStatus(MyRental).subscribe(
+        (response) => {
+          this.toastrService.success(response.message.toString(), 'Tarihler Uygun');
+          var date1 = new Date(this.estReturnDate.toString());
+          var date2 = new Date(this.rentDate.toString());
+          var difference = date1.getTime() - date2.getTime();
+          var numberOfDays = Math.ceil(difference / (1000 * 3600 * 24));
+          this.totalPaye = numberOfDays * (this.carDetails.dailyPrice + (this.carDetails.dailyPrice * 18 / 100));
+  
+          this.paymentService.setRentalCar(MyRental, this.totalPaye);
+  
+          console.log(MyRental);
+          console.log(this.totalPaye);
+          setTimeout(() => {
+            this.toastrService.info("Ödeme sayfasına yönlendiriliyorsunuz...", "Ödeme İşlemleri");
+            this.router.navigate(['/payments']);
+          }, 2000)
+        },
+        (responseError)=>
+        {
+          this.toastrService.error(responseError.error.message,"Hata");
+        }
+      );
+    }
+    else{
+      this.toastrService.error("Findeks puanınız kiralama işlemi için uygun değildir, uygun bir araç seçiniz.","Hata");
+    }
+  });
 
-        this.paymentService.setRentalCar(MyRental, this.totalPaye);
-
-        console.log(MyRental);
-        console.log(this.totalPaye);
-        setTimeout(() => {
-          this.toastrService.info("Ödeme sayfasına yönlendiriliyorsunuz...", "Ödeme İşlemleri");
-          this.router.navigate(['/payments']);
-        }, 2000)
-      },
-      (responseError)=>
-      {
-        this.toastrService.error(responseError.error.message,"Hata");
-      }
-    );
   }
 }

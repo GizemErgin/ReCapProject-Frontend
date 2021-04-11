@@ -55,6 +55,7 @@ export class CarAddComponent implements OnInit {
       modelYear:["",Validators.required],
       dailyPrice:["",Validators.required],
       description:["",Validators.required],
+      findeks:["",Validators.required],
       carImage:[null]
     })
   }
@@ -68,7 +69,8 @@ export class CarAddComponent implements OnInit {
         colorId: carModel.colorId,
         modelYear: carModel.modelYear,
         dailyPrice: carModel.dailyPrice,
-        description: carModel.description
+        description: carModel.description,
+        findeks: carModel.findeks,
       };
       console.log(carModel);
       console.log(this.addCar)

@@ -1,21 +1,32 @@
-thead {
-    background-color: bg-light;
-    color:white;
-    font-weight: bold;
-    letter-spacing: 1px; 
- }
+
  .sidebar-title {
     background-color:#FFC107;
-    color:black;
+    color:white;
+    text-align: center;
     letter-spacing: 1px; 
  }
 
  ul
 {
+   background-color: transparent;
         list-style-type: none;
         padding-left: 0;
+        border-color: transparent;
 }
 .active{
    background-color:rgba(156, 154, 154, 0.247);
-   color: black;
+   color:black;
+   border-color: transparent;
 }
+
+.list-group-item{
+   background-color: transparent;
+   border-color: transparent;
+}
+
+.fs-5{
+  text-align:center;
+}
+
+
+

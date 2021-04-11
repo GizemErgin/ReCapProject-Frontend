@@ -1,0 +1,30 @@
+<div class="content rounded-0 mt-4">
+    <div class="col-md-12">
+        <div class="customer">
+            <div class="card-header"><h5 class="title">Şirket Bilgileri</h5></div>
+            <div class="card-body">
+                <form [formGroup]="customerAddForm">
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <label for="id">Kullanıcı Id:</label>
+                            <input type="number" id="userId" formControlName="userId" class="form-control" aria-label="Kullanıcı"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="companyName">Şirket Adı: (Bireysel müşterilerimiz için zorunlu değildir.)</label>
+                            <input type="text" id="companyName" formControlName="companyName" class="form-control" aria-label="Şirket"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="findeks">Findeks Puanı:</label>
+                            <input type="text" id="findeks" formControlName="findeks" class="form-control" aria-label="Findeks"/>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end">
+                            <button class="btn btn-fill btn-warning btn-lg" (click)="add()">
+                                Kaydet
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

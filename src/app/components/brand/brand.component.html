@@ -1,12 +1,17 @@
-<div class="rounded-0 mt-4">
+<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+<div class="rounded-0 mt-4" style="width: 170px;">
   <ul class="list-group">
-    <li class="list-group-item sidebar-title">BRANDS</li>
+    <li class="list-group-item sidebar-title bg-dark h5">Markalar</li>
+    <hr> 
+    <div class="list-group-item p-1" style="width: 170px;">
+  
     <li
       (click)="setAllBrand()"
       [class]="getAllBrandClass()"
       routerLink="/cars"
     >
-      All Brands
+      Tüm Markalar
     </li>
     <li
       (click)="setCurrentBrand(brand)"
@@ -16,5 +21,10 @@
     >
       {{ brand.brandName }}
     </li>
+  </div>
   </ul>
+
 </div>
+</div>
+
+

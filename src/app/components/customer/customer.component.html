@@ -1,6 +1,6 @@
 <div class="customer rounded-0 mt-4">
   <div class="panel-footer text-center">
-    <span class="d-block p-1 bg-warning text-white" style="margin-top: 25px"
+    <span class="d-block p-1 bg-light text-black" style="margin-top: 25px"
       ><h5>Müşteriler</h5></span
     >
   </div>
@@ -16,6 +16,7 @@
         <th>Ad</th>
         <th>Soyad</th>
         <th>Şirket Adı</th>
+        <th>Findeks Puanı</th>
         <th>Güncelle</th>
       </tr>
     </thead>
@@ -25,6 +26,7 @@
       <td>{{ customer.firstName }}</td>
       <td>{{ customer.lastName }}</td>
       <td>{{ customer.companyName }}</td>
+      <td>{{ customer.findeks }}</td>
       <td ><button routerLink="/customers/update/{{customer.id}}"  type="button" class="btn btn-outline-dark">Güncelle</button></td>
     </tr>
   </tbody>

@@ -39,7 +39,8 @@
         <div style="text-align:center"  aria-current="true" *ngIf="carDetails"><h4>
             {{carDetails.brandName}} -- {{carDetails.description}}
         </h4></div>
-    <table class="table">
+    <table class="table"
+    style="text-align: center;">
        
         <thead>
             <tr>
@@ -49,6 +50,7 @@
                 <th>Model Yılı</th>
                 <th>Fiyat</th>
                 <th>Açıklama</th>
+                <th>Findeks Puanı</th>
                 <th>Kirala</th>
                 
      
@@ -61,7 +63,8 @@
             <td>{{carDetails.modelYear}}</td>
             <td>{{carDetails.dailyPrice | vatAdded:18}}</td>
             <td>{{carDetails.description}}</td>
-            <td ><button routerLink="/cars/rental/{{carDetails.id}}"  type="button" class="btn btn-outline-success">Kirala</button></td>
+            <td>{{carDetails.findeks}}</td>
+            <td ><button (click)="isCustomer()" routerLink="/cars/rental/{{carDetails.id}}"  type="button" class="btn btn-outline-success">Kirala</button></td>
           
             
         </tr>
